@@ -1,0 +1,19 @@
+# THE ZEN C DOCUMENTATION CONFIG
+base_url = "https://docs.zenc-lang.org"
+title = "Zen C Documentation"
+description = "Official Grimoire for the Zen C Systems Language."
+default_language = "en"
+
+# THEME SETTINGS
+compile_sass = false
+highlight_code = true
+highlight_theme = "css" # We will use our own CSS variables for colors
+
+[extra]
+version = "v0.4.0"
+github_url = "https://github.com/z-libs/Zen-C"
+
+[markdown]
+# This allows us to use HTML inside markdown if needed for complex tables
+render_emoji = true
+external_links_target_blank = true

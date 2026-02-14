@@ -1,0 +1,935 @@
+:root {
+    /* "Zen Temple" Color Palette */
+    --bg: #161615;
+    --surface: #1c1c1b;
+    --fg: #d1d1cf;
+    --muted: #8a8a88;
+    --border: rgba(232, 230, 227, 0.08);
+    --primary: #e8e6e3;
+
+    /* Syntax Highlighting */
+    --kwd: #ff9f6e;
+    --str: #a3be8c;
+    --typ: #ebcb8b;
+    --fn: #88c0d0;
+    --num: #d08770;
+    --com: #656a70;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.grid-bg,
+.glow-decoration {
+    display: none;
+}
+
+/* --- DESKTOP LAYOUT --- */
+.container {
+    max-width: 1600px;
+    /* Increased max-width for wider layout */
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* --- Typography --- */
+h1,
+h2,
+h3 {
+    color: var(--primary);
+    letter-spacing: -0.03em;
+    font-family: 'Kaisei Tokumin', serif;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+section[id] {
+    scroll-margin-top: 140px;
+}
+
+.section-desc {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 600px;
+}
+
+.section-pad {
+    padding-bottom: 5rem;
+    padding-top: 3rem;
+}
+
+.section-header {
+    margin-bottom: 2.5rem;
+}
+
+/* --- Navigation --- */
+header {
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+    margin-bottom: 2.5rem;
+    background: rgba(22, 22, 21, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Kaisei Tokumin', serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: default;
+    letter-spacing: -0.02em;
+}
+
+.version {
+    color: var(--muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-left: 2rem;
+    transition: color 0.2s;
+    font-weight: 500;
+}
+
+nav a:hover,
+nav a.github-link {
+    color: var(--primary);
+}
+
+/* --- Hero --- */
+.hero {
+    display: grid;
+    /* WIDER TERMINAL: ~30% Text / ~70% Terminal */
+    grid-template-columns: 0.5fr 1.5fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 3rem;
+    margin-top: 1rem;
+}
+
+.mega-title {
+    font-family: 'Kaisei Tokumin', serif;
+    font-size: 5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    margin-bottom: 1rem;
+    background: linear-gradient(180deg, var(--primary) 0%, var(--muted) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 80px rgba(255, 255, 255, 0.15);
+}
+
+.sub-title {
+    font-size: 1.8rem;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    color: var(--fg);
+    margin-bottom: 1.25rem;
+}
+
+.lead {
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    max-width: 95%;
+    line-height: 1.6;
+}
+
+.lead strong {
+    color: var(--fg);
+    font-weight: 600;
+}
+
+/* Command Line */
+.cmd-line-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 2rem;
+    position: relative;
+    max-width: 100%;
+}
+
+.cmd-line {
+    background: #000;
+    border: 1px solid var(--border);
+    padding: 10px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--muted);
+    border-radius: 6px;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.prompt {
+    color: var(--fg);
+    margin-right: 8px;
+    user-select: none;
+    opacity: 0.5;
+}
+
+.copy-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    width: 38px;
+    height: 38px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.copy-btn:hover {
+    background: #1a1a1a;
+    color: var(--primary);
+    border-color: #333;
+}
+
+.copy-feedback {
+    position: absolute;
+    left: 100%;
+    margin-left: 12px;
+    color: var(--kwd);
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.btn {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 10px 24px;
+    border-radius: 2px;
+    transition: 0.2s;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background: var(--fg);
+    color: var(--bg);
+}
+
+.btn-primary:hover {
+    background: #fff;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--fg);
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+    border-color: var(--muted);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* --- Code Block with Line Numbers --- */
+.hero-code {
+    background: #050505;
+    border: 1px solid #27272a;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    /* Ensure it doesn't overflow horizontally */
+    max-width: 100%;
+}
+
+.code-header-simple {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #18181b;
+    padding: 10px 16px;
+    background: #09090b;
+}
+
+.window-controls {
+    display: flex;
+    gap: 6px;
+}
+
+.control {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.control.red {
+    background-color: #ff5f56;
+}
+
+.control.yellow {
+    background-color: #ffbd2e;
+}
+
+.control.green {
+    background-color: #27c93f;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: auto;
+    margin-left: 16px;
+    opacity: 0.6;
+}
+
+.terminal-icon {
+    color: var(--muted);
+    opacity: 0.7;
+}
+
+.file-name-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+/* Flex Container for Line Numbers + Code */
+.code-body {
+    display: flex;
+    padding: 1.5rem;
+    background: #050505;
+}
+
+.line-numbers {
+    display: flex;
+    flex-direction: column;
+    color: var(--muted);
+    opacity: 0.4;
+    text-align: right;
+    padding-right: 1.5rem;
+    user-select: none;
+    /* Prevent copying line numbers */
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    border-right: 1px solid #27272a;
+    margin-right: 1.5rem;
+    min-width: 2.5rem;
+}
+
+pre {
+    padding: 0;
+    margin: 0;
+    white-space: pre;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--fg);
+    flex-grow: 1;
+}
+
+pre code {
+    display: block;
+    min-width: 100%;
+}
+
+/* Syntax Colors */
+.kwd {
+    color: var(--kwd);
+}
+
+.str {
+    color: var(--str);
+}
+
+.typ {
+    color: var(--typ);
+}
+
+.fn {
+    color: var(--fn);
+}
+
+.num {
+    color: var(--num);
+}
+
+.com {
+    color: var(--com);
+    font-style: italic;
+}
+
+/* --- Use Cases Ticker --- */
+.use-cases-ticker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+    border-top: 1px solid transparent;
+}
+
+.uc-label {
+    color: var(--fg);
+    font-weight: 700;
+    margin-right: 0.5rem;
+}
+
+.uc-dot {
+    opacity: 0.2;
+}
+
+/* --- Features & Tooling --- */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 5rem;
+    border-radius: 1px;
+}
+
+.tooling-grid {
+    border: 1px solid var(--border);
+    margin-bottom: 0;
+}
+
+.feature-card {
+    background: var(--bg);
+    padding: 2.5rem 2rem;
+    transition: background 0.2s;
+}
+
+.feature-card:hover {
+    background: #0c0c0e;
+}
+
+.feature-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: var(--fg);
+}
+
+.feature-card p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+/* --- Interop Grid --- */
+.interop-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.interop-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s;
+}
+
+.interop-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.interop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.interop-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.flag-badge {
+    background: #222;
+    color: var(--typ);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+
+.interop-card p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.mini-code {
+    background: #000;
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+}
+
+.mini-code pre {
+    padding: 0;
+    font-size: 0.75rem;
+}
+
+/* --- Sponsors --- */
+.sponsors-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4rem;
+}
+
+.sponsors-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.tier-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.tier-card:hover {
+    transform: translateY(-4px);
+    border-color: #333;
+}
+
+.tier-card.featured {
+    background: #18181b;
+    border-color: #3f3f46;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+.tier-card.featured::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.tier-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+}
+
+.tier-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.tier-price span {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 400;
+}
+
+.tier-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.tier-features {
+    list-style: none;
+    text-align: left;
+    font-size: 0.85rem;
+    color: var(--fg);
+    margin-top: auto;
+}
+
+.tier-features li {
+    margin-bottom: 0.8rem;
+    display: flex;
+    gap: 8px;
+}
+
+/* --- Installation --- */
+.installation {
+    text-align: center;
+    border-top: 1px solid var(--border);
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.install-steps {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 2.5rem 0 1.5rem 0;
+    flex-wrap: wrap;
+}
+
+.step {
+    background: var(--surface);
+    padding: 16px 24px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.step-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    opacity: 0.6;
+}
+
+.step code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--fg);
+}
+
+.install-note {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.install-note code {
+    color: var(--fg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+}
+
+/* --- Footer --- */
+footer.container {
+    border-top: 1px solid var(--border);
+    padding: 4rem 2rem;
+    margin-top: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.footer-logo {
+    color: var(--fg);
+    font-family: 'Kaisei Tokumin', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.footer-links a {
+    margin-left: 24px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: var(--fg);
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 900px) {
+    .container {
+        padding: 0 1.25rem;
+    }
+
+    .section-pad {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    /* Hero */
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    .hero-text {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mega-title {
+        font-size: clamp(3rem, 15vw, 4.5rem);
+        line-height: 1;
+        letter-spacing: -0.04em;
+    }
+
+    .sub-title {
+        font-size: 1.35rem;
+        max-width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    /* Terminal: Edge-to-Edge */
+    /* Terminal: Centered Card */
+    .hero-code {
+        width: 100%;
+        margin: 0 auto;
+        border-radius: 6px;
+        text-align: left;
+        border: 1px solid #27272a;
+    }
+
+    .code-body {
+        padding: 1.25rem;
+    }
+
+    .line-numbers {
+        font-size: 0.75rem;
+        /* Smaller mobile font */
+        padding-right: 0.75rem;
+        margin-right: 0.75rem;
+        min-width: 1.5rem;
+    }
+
+    pre {
+        font-size: 0.75rem;
+        tab-size: 2;
+    }
+
+    .code-header-simple {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    /* Command Line */
+    .cmd-line-wrapper {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .cmd-line {
+        width: 100%;
+        text-align: left;
+        overflow-x: auto;
+    }
+
+    .copy-btn {
+        width: 100%;
+        height: 44px;
+    }
+
+    .copy-feedback {
+        position: relative;
+        left: 0;
+        bottom: 0;
+        margin: 0;
+        margin-top: -8px;
+        text-align: center;
+        width: 100%;
+    }
+
+    /* Header / Nav */
+    header {
+        position: relative;
+        padding: 1.5rem 0;
+    }
+
+    .nav-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.25rem;
+    }
+
+    nav a {
+        margin: 0 0.5rem;
+    }
+
+    /* Vertical Stack for Mobile */
+    .features-grid,
+    .interop-grid,
+    .tiers-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+        background: transparent;
+        border: none;
+        margin-left: 0;
+        margin-right: 0;
+        overflow: visible;
+    }
+
+    .feature-card {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 2rem 1.5rem;
+    }
+
+    .interop-card,
+    .tier-card {
+        width: 100%;
+        max-width: none;
+    }
+
+    /* Use Cases - Native Horizontal Scroll */
+    .use-cases-ticker {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 1.5rem;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+    }
+
+    .use-cases-ticker .uc-item,
+    .use-cases-ticker .uc-label,
+    .use-cases-ticker .uc-dot {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+
+    /* Installation */
+    .install-steps {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .step {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    /* Footer */
+    footer.container {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+    }
+
+    .footer-links a {
+        margin: 0;
+    }
+}

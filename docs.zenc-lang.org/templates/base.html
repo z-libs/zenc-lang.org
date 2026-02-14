@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+    
+    <link rel="stylesheet" href="https://zenc-lang.org/style.css">
+    
+    <style>
+        /* DOCS LAYOUT OVERRIDES */
+        body { display: flex; flex-direction: column; min-height: 100vh; }
+        
+        .docs-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr; /* Fixed Sidebar + Fluid Content */
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+            flex-grow: 1;
+        }
+
+        /* SIDEBAR (The Tree) */
+        .sidebar {
+            border-right: 1px solid var(--border);
+            padding: 2rem 1.5rem;
+            position: sticky;
+            top: 80px; /* Below header */
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+            background: var(--bg);
+        }
+        
+        .sidebar-group { margin-bottom: 2rem; }
+        .sidebar-title { 
+            font-family: 'JetBrains Mono', monospace; 
+            font-size: 0.75rem; 
+            color: var(--muted); 
+            text-transform: uppercase; 
+            margin-bottom: 1rem; 
+            letter-spacing: 0.05em;
+        }
+        
+        .sidebar-link { 
+            display: block; 
+            padding: 6px 0; 
+            color: var(--fg); 
+            font-size: 0.9rem; 
+            text-decoration: none; 
+            border-left: 1px solid transparent;
+            padding-left: 1rem;
+            margin-left: -1px;
+        }
+        .sidebar-link:hover { color: var(--primary); border-left-color: var(--muted); }
+        .sidebar-link.active { 
+            color: var(--primary); 
+            font-weight: 600; 
+            border-left-color: var(--kwd); 
+            background: linear-gradient(90deg, rgba(255,255,255,0.03), transparent);
+        }
+
+        /* MAIN CONTENT area */
+        .doc-content { padding: 3rem 4rem; max-width: 900px; }
+        
+        /* Typography for Docs */
+        .doc-content h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .doc-content h2 { font-size: 1.5rem; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        .doc-content p { margin-bottom: 1.5rem; color: var(--muted); }
+        .doc-content code { background: #000; padding: 2px 6px; border: 1px solid var(--border); border-radius: 4px; font-family: 'JetBrains Mono'; font-size: 0.85rem; color: var(--str); }
+        .doc-content pre { background: #000; padding: 1.5rem; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 2rem; overflow-x: auto; }
+
+        .doc-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            overflow: hidden; /* Keeps borders sharp */
+            background: var(--surface);
+        }
+
+        .doc-content th {
+            text-align: left;
+            padding: 12px 16px;
+            background: #121211;
+            color: var(--muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .doc-content td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--fg);
+            vertical-align: top; /* Aligns multiline descriptions nicely */
+        }
+
+        /* Highlight the 'Signature' column (usually the 2nd one) */
+        .doc-content td:nth-child(2) {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--fn); /* Blue-ish function color */
+            font-size: 0.85rem;
+            background: rgba(0,0,0,0.2); /* Slight dim for code background */
+        }
+        
+        /* Make the 'Method' column (1st one) bold */
+        .doc-content td:nth-child(1) strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .doc-content tr:last-child td { border-bottom: none; }
+        .doc-content tr:hover { background: rgba(255,255,255,0.02); }
+
+        /* API BADGES */
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; border: 1px solid var(--border); font-family: 'JetBrains Mono'; text-transform: uppercase; }
+        .badge.complexity { border-color: var(--kwd); color: var(--kwd); }
+        .badge.version { border-color: var(--fn); color: var(--fn); }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo">Zen C <span class="version">{{ config.extra.version }}</span></div>
+            <nav>
+                <a href="https://zenc-lang.org">Home</a>
+                <a href="/" class="active">Docs</a> <a href="https://git.zenc-lang.org">Git</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="docs-layout">
+        <aside class="sidebar">
+            <div class="sidebar-group">
+                <div class="sidebar-title">Standard Library</div>
+                <a href="/std/vec" class="sidebar-link">std/vec</a>
+                <a href="/std/map" class="sidebar-link">std/map</a>
+                <a href="/std/net" class="sidebar-link">std/net</a>
+                <a href="/std/fs" class="sidebar-link">std/fs</a>
+            </div>
+            <div class="sidebar-group">
+                <div class="sidebar-title">Language Guide</div>
+                <a href="/guide/ownership" class="sidebar-link">Ownership</a>
+                <a href="/guide/async" class="sidebar-link">Async/Await</a>
+            </div>
+        </aside>
+
+        <main class="doc-content">
+            {% block content %}
+                {{ section.content | default(value=page.content) | safe }}
+            {% endblock content %}
+        </main>
+    </div>
+
+</body>
+</html>

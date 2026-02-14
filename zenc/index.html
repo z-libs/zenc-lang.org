@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zen C - Modern Ergonomics. Pure C.</title>
+    <meta name="description"
+        content="A modern systems programming language that compiles to human-readable C11 with zero overhead.">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Kaisei+Tokumin:wght@500;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🟩</text></svg>">
+</head>
+
+<body>
+
+    <div class="grid-bg"></div>
+    <div class="glow-decoration"></div>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo">Zen C <span class="version">v0.4.0</span></div>
+            <nav>
+                <a href="https://github.com/z-libs/Zen-C/blob/main/README.md">Docs</a>
+                <a href="https://git.zenc-lang.org/">Mirror</a>
+                <a href="#interop">Interop</a>
+                <a href="#sponsors">Sponsors</a>
+                <a href="https://github.com/z-libs/Zen-C" class="github-link">GitHub ↗</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero container">
+            <div class="hero-text">
+                <h1 class="mega-title">ZEN C</h1>
+                <h2 class="sub-title">Modern Ergonomics.<br>Zero Overhead.<br>Pure C.</h2>
+
+                <p class="lead">
+                    A strictly typed systems language that brings <strong>pattern matching</strong>,
+                    <strong>traits</strong>, and <strong>ownership semantics</strong> to the C ecosystem.
+                </p>
+
+                <div class="cmd-line-wrapper">
+                    <div class="cmd-line" id="install-cmd">
+                        <span class="prompt">$</span> git clone https://git.zenc-lang.org/Zen-C.git
+                    </div>
+                    <button class="copy-btn" aria-label="Copy to clipboard" onclick="copyToClipboard()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <span class="copy-feedback" id="copy-feedback">COPIED</span>
+                </div>
+
+                <div class="hero-actions">
+                    <a href="https://github.com/z-libs/Zen-C" class="btn btn-primary">Get Started</a>
+                    <a href="https://discord.com/invite/q6wEsCmkJP" class="btn btn-secondary">Join Discord</a>
+                </div>
+            </div>
+
+            <div class="hero-code">
+                <div class="code-header-simple">
+                    <div class="window-controls">
+                        <span class="control red"></span>
+                        <span class="control yellow"></span>
+                        <span class="control green"></span>
+                    </div>
+                    <!-- Moved title to be centered or next to controls via CSS -->
+                    <div class="file-info">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="terminal-icon">
+                            <polyline points="4 17 10 11 4 5"></polyline>
+                            <line x1="12" y1="19" x2="20" y2="19"></line>
+                        </svg>
+                        <span class="file-name-mono">echo_server.zc</span>
+                    </div>
+                </div>
+
+                <div class="code-body">
+                    <div class="line-numbers">
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>6</span>
+                        <span>7</span>
+                        <span>8</span>
+                        <span>9</span>
+                        <span>10</span>
+                        <span>11</span>
+                        <span>12</span>
+                        <span>13</span>
+                        <span>14</span>
+                        <span>15</span>
+                        <span>16</span>
+                        <span>17</span>
+                        <span>18</span>
+                    </div>
+                    <pre><code><span class="kwd">import</span> <span class="str">"std/net/tcp.zc"</span>
+
+<span class="kwd">fn</span> <span class="fn">main</span>() {
+    <span class="str">"Echo Server listening on :8080"</span>;
+    <span class="kwd">let</span> listener = <span class="typ">TcpListener</span>::<span class="fn">bind</span>(<span class="str">"127.0.0.1"</span>, <span class="num">8080</span>).<span class="fn">unwrap</span>();
+
+    <span class="kwd">loop</span> {
+        <span class="com">// Accept new connections</span>
+        <span class="kwd">let</span> stream = listener.<span class="fn">accept</span>().<span class="fn">unwrap</span>();
+        <span class="kwd">let</span> buf: <span class="typ">char</span>[<span class="num">1024</span>];
+        
+        <span class="kwd">while</span> <span class="num">true</span> {
+            <span class="kwd">let</span> n = stream.<span class="fn">read</span>(&buf[<span class="num">0</span>], <span class="num">1024</span>).<span class="fn">unwrap</span>();
+            <span class="kwd">if</span> n == <span class="num">0</span> { <span class="kwd">break</span>; }
+            stream.<span class="fn">write</span>(&buf[<span class="num">0</span>], n);
+        }
+    }
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="use-cases-ticker">
+                <span class="uc-label">BUILT FOR:</span>
+                <span class="uc-item">KERNEL DEV</span>
+                <span class="uc-dot">•</span>
+                <span class="uc-item">GAME ENGINES</span>
+                <span class="uc-dot">•</span>
+                <span class="uc-item">EMBEDDED SYSTEMS</span>
+                <span class="uc-dot">•</span>
+                <span class="uc-item">HIGH-FREQUENCY TRADING</span>
+            </div>
+        </div>
+
+        <section class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Native C Interop</h3>
+                    <p>100% ABI compatible. Includes C headers directly, supports raw function pointers, and compiles to
+                        standard C11/GNU C.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Resource Semantics</h3>
+                    <p>Move-by-default semantics and RAII (Drop trait) prevent double-free errors without the overhead
+                        of a
+                        garbage collector.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Metaprogramming</h3>
+                    <p>Execute code at compile-time with <code>comptime</code>, embed binary assets, and use smart
+                        attributes for optimization.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Pattern Matching</h3>
+                    <p>Destructure enums, match against ranges, and use guards for powerful control flow compared to
+                        switch
+                        statements.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Generics</h3>
+                    <p>Write reusable, type-safe code with zero runtime overhead using monomorphized generics and trait
+                        bounds.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Concurrency</h3>
+                    <p>Built-in <code>async</code>/<code>await</code> for high-performance I/O operations without
+                        complex
+                        callback hell.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="interop" class="container section-pad">
+            <div class="section-header">
+                <h2 class="section-title">Polyglot Architecture</h2>
+                <p class="section-desc">Zen C adapts to your ecosystem. Link seamlessly with existing codebases.</p>
+            </div>
+
+            <div class="interop-grid">
+                <div class="interop-card">
+                    <div class="interop-header">
+                        <h3>CUDA</h3>
+                        <span class="flag-badge">--cuda</span>
+                    </div>
+                    <p>Write GPU kernels with Zen syntax using <code>launch</code> and <code>@global</code> attributes.
+                    </p>
+                    <div class="mini-code">
+                        <pre><code><span class="kwd">@global</span>
+<span class="kwd">fn</span> <span class="fn">add</span>(a: <span class="typ">float</span>*, b: <span class="typ">float</span>*) {
+    <span class="kwd">let</span> i = <span class="fn">thread_id</span>();
+    a[i] += b[i];
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="interop-card">
+                    <div class="interop-header">
+                        <h3>C++</h3>
+                        <span class="flag-badge">--cpp</span>
+                    </div>
+                    <p>Generate C++ compatible code to link against libraries. Instantiate templates in <code>raw</code>
+                        blocks.</p>
+                    <div class="mini-code">
+                        <pre><code><span class="kwd">raw</span> {
+    std::vector&lt;<span class="typ">int</span>&gt; <span class="fn">get_vec</span>() {
+        <span class="kwd">return</span> {1, 2, 3};
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="interop-card">
+                    <div class="interop-header">
+                        <h3>Objective-C</h3>
+                        <span class="flag-badge">--objc</span>
+                    </div>
+                    <p>Native macOS support. Mix <code>[Object message]</code> syntax within your systems code.</p>
+                    <div class="mini-code">
+                        <pre><code><span class="kwd">raw</span> {
+    id pool = [[NSPool alloc] init];
+    [pool drain];
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container section-pad">
+            <div class="section-header">
+                <h2 class="section-title">First-Class Tooling</h2>
+            </div>
+            <div class="features-grid tooling-grid">
+                <div class="feature-card">
+                    <h3>LSP Support</h3>
+                    <p>Built-in Language Server provides Go-to-Definition, Hover, Completion, and Diagnostics.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Interactive REPL</h3>
+                    <p>Experiment instantly with <code>zc repl</code>. Features persistent history and benchmarking.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Portable Builds</h3>
+                    <p>Compile to <strong>APE</strong> (Actually Portable Executable) to run one binary on any OS.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sponsors" class="container section-pad">
+            <div class="sponsors-container">
+                <div class="sponsors-intro">
+                    <h2 class="section-title">Sustain the Project</h2>
+                    <p class="section-desc">
+                        Zen C is strictly Open Source and community-funded.
+                        Contributions via Open Collective ensure the longevity of the infrastructure.
+                    </p>
+                    <a href="https://opencollective.com/z-libs" class="btn btn-primary" target="_blank">
+                        View Open Collective &rarr;
+                    </a>
+                </div>
+
+                <div class="tiers-grid">
+                    <div class="tier-card">
+                        <div class="tier-name">Backer</div>
+                        <div class="tier-price">$5<span>/mo</span></div>
+                        <p class="tier-desc">Support daily maintenance.</p>
+                        <ul class="tier-features">
+                            <li>✓ Badge on GitHub</li>
+                            <li>✓ Discord Role</li>
+                        </ul>
+                    </div>
+                    <div class="tier-card featured">
+                        <div class="tier-name">Sponsor</div>
+                        <div class="tier-price">$100<span>/mo</span></div>
+                        <p class="tier-desc">Fuel new features.</p>
+                        <ul class="tier-features">
+                            <li>✓ All Backer rewards</li>
+                            <li>✓ Early RFC access</li>
+                            <li>✓ Logo in README</li>
+                        </ul>
+                    </div>
+                    <div class="tier-card">
+                        <div class="tier-name">Enterprise</div>
+                        <div class="tier-price">Contact</div>
+                        <p class="tier-desc">Tailored solutions.</p>
+                        <ul class="tier-features">
+                            <li>✓ Priority Support</li>
+                            <li>✓ Logo on Homepage</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container section-pad installation">
+            <h2 class="section-title">Start Compiling</h2>
+            <div class="install-steps">
+                <div class="step">
+                    <span class="step-label">CLONE</span>
+                    <code>git clone https://git.zenc-lang.org/Zen-C.git</code>
+                </div>
+                <div class="step">
+                    <span class="step-label">BUILD</span>
+                    <code>make</code>
+                </div>
+                <div class="step">
+                    <span class="step-label">INSTALL</span>
+                    <code>sudo make install</code>
+                </div>
+            </div>
+            <div class="install-note">
+                Or compile as APE: <code>make ape</code>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="container">
+        <div class="footer-col">
+            <strong class="footer-logo">Zen C</strong>
+            <span>&copy; 2026 z-libs Org.</span>
+        </div>
+        <div class="footer-links">
+            <a href="https://git.zenc-lang.org/">Source Mirror</a>
+            <a href="https://github.com/z-libs/Zen-C/blob/main/docs/std/vec.md">Vec</a>
+            <a href="https://github.com/z-libs/Zen-C/blob/main/docs/std/map.md">Map</a>
+            <a href="https://github.com/z-libs/Zen-C/blob/main/docs/std/net.md">Net</a>
+            <a href="https://github.com/z-libs/Zen-C/blob/main/docs/std/fs.md">Fs</a>
+        </div>
+    </footer>
+
+    <script>
+        function copyToClipboard() {
+            const cmdElement = document.getElementById('install-cmd');
+            // Clean logic to extract text
+            let text = cmdElement.innerText;
+            if (text.startsWith('$')) {
+                text = text.substring(1).trim();
+            }
+
+            navigator.clipboard.writeText(text).then(() => {
+                const feedback = document.getElementById('copy-feedback');
+                feedback.style.opacity = '1';
+                setTimeout(() => {
+                    feedback.style.opacity = '0';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+
+</html>
