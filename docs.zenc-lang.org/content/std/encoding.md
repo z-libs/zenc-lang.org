@@ -1,3 +1,7 @@
++++
+title = "Encoding (`std/encoding/`)"
++++
+
 # Encoding (`std/encoding/`)
 
 Data encoding and decoding utilities.

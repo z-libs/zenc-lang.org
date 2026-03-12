@@ -1,3 +1,7 @@
++++
+title = "JSON (`std/json.zc`)"
++++
+
 # JSON (`std/json.zc`)
 
 The `std/json` module provides a DOM-style JSON parser and builder.

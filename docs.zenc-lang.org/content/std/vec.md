@@ -1,3 +1,7 @@
++++
+title = "Standard Library: Vector (`std/vec.zc`)"
++++
+
 # Standard Library: Vector (`std/vec.zc`)
 
 `Vec<T>` is a contiguous, growable array type. It is the standard dynamic array used in Zen-C.

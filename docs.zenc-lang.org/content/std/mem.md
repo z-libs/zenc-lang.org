@@ -1,3 +1,7 @@
++++
+title = "Standard Library: Memory (`std/mem.zc`)"
++++
+
 # Standard Library: Memory (`std/mem.zc`)
 
 Core memory management utilities and standard traits for manual memory control, allocation, and lifecycle management.

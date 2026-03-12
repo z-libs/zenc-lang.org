@@ -1,3 +1,7 @@
++++
+title = "Standard Library: Path (`std/path.zc`)"
++++
+
 # Standard Library: Path (`std/path.zc`)
 
 `Path` provides cross-platform file path manipulation utilities. It wraps a `String` and handles separators (slash vs backslash) intelligently, though currently biased towards Unix defaults pending full Windows support integration.

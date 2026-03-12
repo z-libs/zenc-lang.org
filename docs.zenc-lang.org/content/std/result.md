@@ -1,3 +1,7 @@
++++
+title = "Standard Library: Result (`std/result.zc`)"
++++
+
 # Standard Library: Result (`std/result.zc`)
 
 `Result<T>` is the standard type for error handling. It represents either success (`Ok`) containing a value, or failure (`Err`) containing a string error message.

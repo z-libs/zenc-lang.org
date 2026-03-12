@@ -1,3 +1,7 @@
++++
+title = "Time (`std/time.zc`)"
++++
+
 # Time (`std/time.zc`)
 
 The `std/time` module provides functionality for measuring time and sleeping.

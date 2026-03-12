@@ -1,3 +1,7 @@
++++
+title = "Math (`std/math.zc`)"
++++
+
 # Math (`std/math.zc`)
 
 The `Math` module provides a core set of standard mathematical constants and functions natively wrapped around the POSIX `<math.h>` standard library to function smoothly within Zen C's Object-Oriented context. 

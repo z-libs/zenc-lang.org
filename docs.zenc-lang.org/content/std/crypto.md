@@ -1,3 +1,7 @@
++++
+title = "Crypto (`std/crypto/`)"
++++
+
 # Crypto (`std/crypto/`)
 
 Cryptographic primitives.

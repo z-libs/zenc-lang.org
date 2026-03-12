@@ -1,3 +1,7 @@
++++
+title = "Standard Library: Random (`std/random.zc`)"
++++
+
 # Standard Library: Random (`std/random.zc`)
 
 The `random` module provides an idiomatic, object-oriented pseudo-random number generator (PRNG). It wraps POSIX `<stdlib.h>` functions (`rand`, `srand`) and automatically seeds using the system clock from `<time.h>`.

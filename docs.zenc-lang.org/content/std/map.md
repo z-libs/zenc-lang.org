@@ -1,3 +1,7 @@
++++
+title = "Standard Library: Map (`std/map.zc`)"
++++
+
 # Standard Library: Map (`std/map.zc`)
 
 `Map<V>` is a generic hash map implementation mapping string keys to values of type `V`.

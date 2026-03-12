@@ -1,3 +1,7 @@
++++
+title = "Standard Library: BigInt (`std/bigint.zc`)"
++++
+
 # Standard Library: BigInt (`std/bigint.zc`)
 
 `BigInt` provides arbitrary-precision integer arithmetic for Zen-C. It allows for the representation and manipulation of integers that exceed the processing capacity of standard hardware types like `u64` or `u128`.

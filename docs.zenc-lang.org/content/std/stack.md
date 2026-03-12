@@ -1,3 +1,7 @@
++++
+title = "Stack (`std/stack.zc`)"
++++
+
 # Stack (`std/stack.zc`)
 
 The `std/stack` module provides a LIFO (Last-In, First-Out) stack data structure.

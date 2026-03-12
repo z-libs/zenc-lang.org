@@ -1,3 +1,7 @@
++++
+title = "Standard Library: Bits (`std/bits.zc`)"
++++
+
 # Standard Library: Bits (`std/bits.zc`)
 
 The `Bits` module provides low-level bitwise operations that are generally implemented via compiler intrinsics rather than native operators, specifically bitwise rotation (circular shift).

@@ -1,3 +1,7 @@
++++
+title = "SIMD — Native Vector Types"
++++
+
 # SIMD — Native Vector Types
 
 `import "std/simd.zc";`

@@ -1,3 +1,7 @@
++++
+title = "Standard Library: Iterator (`std/iter.zc`)"
++++
+
 # Standard Library: Iterator (`std/iter.zc`)
 
 Use `std/iter.zc` to define custom iterators compatible with `for-in` loops. By implementing the `Iterable` trait, your types can integrate seamlessly with Zen C's loop syntax.

@@ -1,3 +1,7 @@
++++
+title = "Standard Library: Sort (`std/sort.zc`)"
++++
+
 # Standard Library: Sort (`std/sort.zc`)
 
 The `sort` module utilizes a highly optimized Polymorphic Macro engine to generate zero-overhead, strictly typed sorting algorithms in C under the hood. It natively implements the `QuickSort` algorithm.

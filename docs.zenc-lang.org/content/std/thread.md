@@ -1,3 +1,7 @@
++++
+title = "Concurrency (`std/thread.zc`)"
++++
+
 # Concurrency (`std/thread.zc`)
 
 The `std/thread` module provides primitives for multithreading and synchronization.

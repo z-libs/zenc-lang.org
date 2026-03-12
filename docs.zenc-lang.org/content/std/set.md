@@ -1,3 +1,7 @@
++++
+title = "Set (`std/set.zc`)"
++++
+
 # Set (`std/set.zc`)
 
 The `std/set` module provides a Generic Hash Set `Set<T>`.

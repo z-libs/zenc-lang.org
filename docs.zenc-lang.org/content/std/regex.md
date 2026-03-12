@@ -1,3 +1,7 @@
++++
+title = "Standard Library: Regex (`std/regex.zc`)"
++++
+
 # Standard Library: Regex (`std/regex.zc`)
 
 Regular expression support based on POSIX `regex.h`. Compile patterns, match strings, and extract sub-matches or split text.

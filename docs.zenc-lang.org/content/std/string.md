@@ -1,3 +1,7 @@
++++
+title = "Standard Library: String (`std/string.zc`)"
++++
+
 # Standard Library: String (`std/string.zc`)
 
 `String` is a growable, heap-allocated string type. It wraps a `Vec<char>` and ensures null-termination for C compatibility.
