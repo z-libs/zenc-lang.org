@@ -25,7 +25,7 @@ jobs:
           
           # Check if the response contains data and flatten it
           if echo "$JSON_DATA" | grep -q "sponsorshipsAsMaintainer"; then
-            echo "$JSON_DATA" | jq '.data.user.sponsorshipsAsMaintainer.nodes | map(.sponsorEntity) | filter(. != null)' > docs.zenc-lang.org/static/data/sponsors.json
+            echo "$JSON_DATA" | jq '[.data.user.sponsorshipsAsMaintainer.nodes[] | .sponsorEntity | select(. != null)]' > docs.zenc-lang.org/static/data/sponsors.json
           else
             echo "[]" > docs.zenc-lang.org/static/data/sponsors.json
             echo "Sponsors fetch failed or returned no data: $JSON_DATA"
