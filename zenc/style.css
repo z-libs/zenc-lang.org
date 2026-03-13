@@ -7,13 +7,15 @@
     --border: rgba(232, 230, 227, 0.08);
     --primary: #e8e6e3;
 
-    /* Syntax Highlighting */
-    --kwd: #ff9f6e;
-    --str: #a3be8c;
-    --typ: #ebcb8b;
-    --fn: #88c0d0;
-    --num: #d08770;
-    --com: #656a70;
+    /* Syntax Highlighting - Zen Temple Palette (Refined) */
+    --kwd: #f97316; /* Vibrant Orange */
+    --str: #a3e635; /* Lime String */
+    --typ: #fbbf24; /* Amber Type */
+    --fn:  #38bdf8; /* Sky Function */
+    --num: #fb7185; /* Rose Number */
+    --com: #71717a; /* Muted Zinc Comment */
+    --punctuation: #94a3b8;
+    --variable: #e2e8f0;
 }
 
 * {
@@ -399,31 +401,29 @@ pre code {
     min-width: 100%;
 }
 
-/* Syntax Colors */
-.kwd {
-    color: var(--kwd);
-}
+/* Syntax Colors (Legacy/Manual) */
+.kwd { color: var(--kwd); font-weight: 600; }
+.str { color: var(--str); }
+.typ { color: var(--typ); font-weight: 500; }
+.fn  { color: var(--fn); }
+.num { color: var(--num); }
+.com { color: var(--com); font-style: italic; opacity: 0.8; }
 
-.str {
-    color: var(--str);
-}
-
-.typ {
-    color: var(--typ);
-}
-
-.fn {
-    color: var(--fn);
-}
-
-.num {
-    color: var(--num);
-}
-
-.com {
-    color: var(--com);
-    font-style: italic;
-}
+/* Zola Syntax Highlighting Support */
+pre code .z-comment { color: var(--com); font-style: italic; }
+pre code .z-string  { color: var(--str); }
+pre code .z-constant { color: var(--num); }
+pre code .z-entity   { color: var(--fn); }
+pre code .z-keyword  { color: var(--kwd); font-weight: 600; }
+pre code .z-storage  { color: var(--kwd); }
+pre code .z-variable { color: var(--variable); }
+pre code .z-parameter { color: var(--variable); }
+pre code .z-function { color: var(--fn); }
+pre code .z-type     { color: var(--typ); font-weight: 500; }
+pre code .z-number   { color: var(--num); }
+pre code .z-punctuation { color: var(--punctuation); }
+pre code .z-heading   { color: var(--primary); font-weight: 700; }
+pre code .z-link      { color: var(--fn); text-decoration: underline; }
 
 /* --- Use Cases Ticker --- */
 .use-cases-ticker {
