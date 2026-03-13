@@ -699,24 +699,11 @@ pre code .z-link {
     align-items: center;
     gap: 3rem;
     width: 100%;
+    min-height: 200px;
+    /* Prevent collapse if images load slowly */
 }
 
-.sponsor-source {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.sponsor-badge {
-    height: 32px;
-    border-radius: 4px;
-    transition: transform 0.2s ease;
-}
-
-.sponsor-badge:hover {
-    transform: scale(1.05);
-}
-
+.sponsor-source,
 .sponsor-avatars {
     width: 100%;
     max-width: 800px;
@@ -727,12 +714,13 @@ pre code .z-link {
 .avatar-grid {
     max-width: 100%;
     height: auto;
-    /* Removed filters that distorted PFPs */
+    filter: none;
+    /* avatars should be in their intended colors */
     transition: opacity 0.3s ease;
 }
 
-.sponsor-avatars a:hover .avatar-grid {
-    opacity: 0.9;
+.gallery-flex a:hover .avatar-grid {
+    opacity: 0.85;
 }
 
 .tier-card.featured::after {
