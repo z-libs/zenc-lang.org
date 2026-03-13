@@ -1,8 +1,8 @@
 +++
-title = "Standard Library: Crypto (`std/crypto/`)"
+title = "std/crypto"
 +++
 
-# Standard Library: Crypto (`std/crypto/`)
+# std/crypto
 
 The `std/crypto` module provides cryptographic primitives and hashing algorithms.
 

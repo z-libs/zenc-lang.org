@@ -1,8 +1,8 @@
 +++
-title = "Standard Library: Regex (`std/regex.zc`)"
+title = "std/regex"
 +++
 
-# Standard Library: Regex (`std/regex.zc`)
+# std/regex
 
 The `std/regex` module providing regular expression support based on POSIX `regex.h`.
 

@@ -1,8 +1,8 @@
 +++
-title = "Standard Library: BigFloat (`std/bigfloat.zc`)"
+title = "std/bigfloat"
 +++
 
-# Standard Library: BigFloat (`std/bigfloat.zc`)
+# std/bigfloat
 
 `BigFloat` provides arbitrary-precision decimal floating-point arithmetic for Zen-C. It is implemented as a scaled `BigInt`, allowing for high-precision calculations.
 

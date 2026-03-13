@@ -1,8 +1,8 @@
 +++
-title = "Standard Library: File System (`std/fs.zc`)"
+title = "std/fs"
 +++
 
-# Standard Library: File System (`std/fs.zc`)
+# std/fs
 
 The `fs` module provides functionality for interacting with the file system, including file I/O and directory operations.
 

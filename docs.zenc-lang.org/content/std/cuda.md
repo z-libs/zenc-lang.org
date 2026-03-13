@@ -1,8 +1,8 @@
 +++
-title = "Standard Library: CUDA (`std/cuda.zc`)"
+title = "std/cuda"
 +++
 
-# Standard Library: CUDA (`std/cuda.zc`)
+# std/cuda
 
 The `std/cuda` module provides helper functions and types for CUDA interoperability, simplifying memory management, synchronization, and device queries.
 

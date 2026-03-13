@@ -1,8 +1,8 @@
 +++
-title = "Standard Library: Networking (`std/net/`)"
+title = "std/net"
 +++
 
-# Standard Library: Networking (`std/net/`)
+# std/net
 
 The `std/net` module provides a comprehensive networking stack including TCP, UDP, DNS, and HTTP.
 

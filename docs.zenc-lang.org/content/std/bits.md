@@ -1,8 +1,8 @@
 +++
-title = "Standard Library: Bits (`std/bits.zc`)"
+title = "std/bits"
 +++
 
-# Standard Library: Bits (`std/bits.zc`)
+# std/bits
 
 The `std/bits` module provides low-level bitwise operations implemented via compiler intrinsics.
 

@@ -1,8 +1,8 @@
 +++
-title = "Standard Library: Slice (`std/slice.zc`)"
+title = "std/slice"
 +++
 
-# Standard Library: Slice (`std/slice.zc`)
+# std/slice
 
 `Slice<T>` is a lightweight, non-owning view into a contiguous sequence of elements, useful for working with fixed-size arrays.
 

@@ -1,8 +1,8 @@
 +++
-title = "Standard Library: Time (`std/time.zc`)"
+title = "std/time"
 +++
 
-# Standard Library: Time (`std/time.zc`)
+# std/time
 
 The `std/time` module provides functionality for measuring time and sleeping.
 

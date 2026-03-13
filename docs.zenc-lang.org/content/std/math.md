@@ -1,8 +1,8 @@
 +++
-title = "Standard Library: Math (`std/math.zc`)"
+title = "std/math"
 +++
 
-# Standard Library: Math (`std/math.zc`)
+# std/math
 
 The `Math` module provides a core set of standard mathematical constants and functions wrapped around the POSIX `<math.h>` standard library.
 
