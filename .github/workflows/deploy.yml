@@ -13,10 +13,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Fetch GitHub Sponsors
-        uses: JamesIves/github-sponsors-action@v1
-        with:
-          token: ${{ secrets.WEBSITE_REPO_TOKEN }}
-          file: docs.zenc-lang.org/data/sponsors.json # For Zola build-time
+        run: |
+          mkdir -p docs.zenc-lang.org/data
+          curl -H "Authorization: bearer ${{ secrets.WEBSITE_REPO_TOKEN }}" \
+               -X POST -d '{"query": "query { user(login: \"Zuhaitz-dev\") { sponsors(first: 100) { edges { node { ... on User { login avatarUrl url } ... on Organization { login avatarUrl url } } } } } }"}' \
+               https://api.github.com/graphql | jq '.data.user.sponsors.edges | map(.node)' > docs.zenc-lang.org/data/sponsors.json
 
       - name: Build Zola Docs
         run: |
