@@ -8,12 +8,18 @@
     --primary: #e8e6e3;
 
     /* Syntax Highlighting - Zen Temple Palette (Refined) */
-    --kwd: #f97316; /* Vibrant Orange */
-    --str: #a3e635; /* Lime String */
-    --typ: #fbbf24; /* Amber Type */
-    --fn:  #38bdf8; /* Sky Function */
-    --num: #fb7185; /* Rose Number */
-    --com: #71717a; /* Muted Zinc Comment */
+    --kwd: #f97316;
+    /* Vibrant Orange */
+    --str: #a3e635;
+    /* Lime String */
+    --typ: #fbbf24;
+    /* Amber Type */
+    --fn: #38bdf8;
+    /* Sky Function */
+    --num: #fb7185;
+    /* Rose Number */
+    --com: #71717a;
+    /* Muted Zinc Comment */
     --punctuation: #94a3b8;
     --variable: #e2e8f0;
 }
@@ -402,28 +408,95 @@ pre code {
 }
 
 /* Syntax Colors (Legacy/Manual) */
-.kwd { color: var(--kwd); font-weight: 600; }
-.str { color: var(--str); }
-.typ { color: var(--typ); font-weight: 500; }
-.fn  { color: var(--fn); }
-.num { color: var(--num); }
-.com { color: var(--com); font-style: italic; opacity: 0.8; }
+.kwd {
+    color: var(--kwd);
+    font-weight: 600;
+}
+
+.str {
+    color: var(--str);
+}
+
+.typ {
+    color: var(--typ);
+    font-weight: 500;
+}
+
+.fn {
+    color: var(--fn);
+}
+
+.num {
+    color: var(--num);
+}
+
+.com {
+    color: var(--com);
+    font-style: italic;
+    opacity: 0.8;
+}
 
 /* Zola Syntax Highlighting Support */
-pre code .z-comment { color: var(--com); font-style: italic; }
-pre code .z-string  { color: var(--str); }
-pre code .z-constant { color: var(--num); }
-pre code .z-entity   { color: var(--fn); }
-pre code .z-keyword  { color: var(--kwd); font-weight: 600; }
-pre code .z-storage  { color: var(--kwd); }
-pre code .z-variable { color: var(--variable); }
-pre code .z-parameter { color: var(--variable); }
-pre code .z-function { color: var(--fn); }
-pre code .z-type     { color: var(--typ); font-weight: 500; }
-pre code .z-number   { color: var(--num); }
-pre code .z-punctuation { color: var(--punctuation); }
-pre code .z-heading   { color: var(--primary); font-weight: 700; }
-pre code .z-link      { color: var(--fn); text-decoration: underline; }
+pre code .z-comment {
+    color: var(--com);
+    font-style: italic;
+}
+
+pre code .z-string {
+    color: var(--str);
+}
+
+pre code .z-constant {
+    color: var(--num);
+}
+
+pre code .z-entity {
+    color: var(--fn);
+}
+
+pre code .z-keyword {
+    color: var(--kwd);
+    font-weight: 600;
+}
+
+pre code .z-storage {
+    color: var(--kwd);
+}
+
+pre code .z-variable {
+    color: var(--variable);
+}
+
+pre code .z-parameter {
+    color: var(--variable);
+}
+
+pre code .z-function {
+    color: var(--fn);
+}
+
+pre code .z-type {
+    color: var(--typ);
+    font-weight: 500;
+}
+
+pre code .z-number {
+    color: var(--num);
+}
+
+pre code .z-punctuation {
+    color: var(--punctuation);
+}
+
+pre code .z-heading {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+pre code .z-link {
+    color: var(--fn);
+    text-decoration: underline;
+}
 
 /* --- Use Cases Ticker --- */
 .use-cases-ticker {
@@ -601,6 +674,41 @@ pre code .z-link      { color: var(--fn); text-decoration: underline; }
     position: relative;
     overflow: hidden;
     box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+.sponsors-gallery {
+    margin-top: 4rem;
+    padding-top: 4rem;
+    border-top: 1px solid var(--border);
+    width: 100%;
+}
+
+.gallery-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+
+.gallery-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.gallery-grid img {
+    max-width: 100%;
+    height: auto;
+    filter: grayscale(1) invert(1) brightness(0.9);
+    transition: filter 0.3s ease;
+}
+
+.gallery-grid a:hover img {
+    filter: none;
 }
 
 .tier-card.featured::after {
