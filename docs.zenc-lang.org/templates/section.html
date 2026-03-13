@@ -1,58 +1,91 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>{{ section.title }}</h1>
-    
-    {% if section.description %}
-        <p>{{ section.description }}</p>
+<h1>{{ section.title }}</h1>
+
+{% if section.description %}
+<p>{{ section.description }}</p>
+{% endif %}
+
+{{ section.content | safe }}
+
+<style>
+    .page-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-bottom: 3rem;
+    }
+
+    .page-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        padding: 1.25rem;
+        border-radius: 6px;
+        text-decoration: none;
+        color: var(--fg);
+        transition: all 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .page-card:hover {
+        border-color: var(--primary);
+        background: rgba(255, 255, 255, 0.03);
+        transform: translateY(-2px);
+    }
+
+    .page-title {
+        color: var(--primary);
+        font-weight: 600;
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    .letter-heading {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border);
+        color: var(--fg);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 1.5rem;
+    }
+</style>
+
+{% if section.subsections %}
+<div class="page-grid" style="margin-top: 2rem;">
+    {% for subsection_path in section.subsections %}
+    {% set sub = get_section(path=subsection_path) %}
+    <a href="{{ sub.permalink }}" class="page-card">
+        <span class="page-title">📁 {{ sub.title }}</span>
+    </a>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="alphabet-directory">
+    {% set current_letter = "" %}
+
+    {% for page in section.pages | sort(attribute="title") %}
+    {% set first_letter = page.title | truncate(length=1, end="") | upper %}
+
+    {% if first_letter != current_letter %}
+    {% if current_letter != "" %}
+</div> {% endif %}
+
+<h2 class="letter-heading">{{ first_letter }}</h2>
+<div class="page-grid"> {% set_global current_letter = first_letter %}
     {% endif %}
-    
-    {{ section.content | safe }}
 
-    <style>
-        .page-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        .page-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 1.25rem;
-            border-radius: 6px;
-            text-decoration: none;
-            color: var(--fg);
-            transition: all 0.2s ease;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        .page-card:hover {
-            border-color: var(--primary);
-            background: rgba(255,255,255,0.03);
-            transform: translateY(-2px);
-        }
-        .page-title {
-            color: var(--primary);
-            font-weight: 600;
-            font-family: 'JetBrains Mono', monospace;
-        }
-    </style>
+    <a href="{{ page.permalink }}" class="page-card">
+        <span class="page-title">{{ page.title }}</span>
+    </a>
 
-    <div class="page-grid">
-        {% for subsection_path in section.subsections %}
-            {% set sub = get_section(path=subsection_path) %}
-            <a href="{{ sub.permalink }}" class="page-card">
-                <span class="page-title">📁 {{ sub.title }}</span>
-            </a>
-        {% endfor %}
-
-        {% for page in section.pages | sort(attribute="title") %}
-            <a href="{{ page.permalink }}" class="page-card">
-                <span class="page-title">{{ page.title }}</span>
-            </a>
-        {% endfor %}
-    </div>
+    {% if loop.last %}
+</div>
+{% endif %}
+{% endfor %}
+</div>
 
 {% endblock content %}

@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{{ config.title }}{% endblock title %}</title>
-    
+
     <link rel="stylesheet" href="https://zenc-lang.org/style.css">
-    
+
     <style>
         /* DOCS LAYOUT OVERRIDES */
-        body { display: flex; flex-direction: column; min-height: 100vh; }
-        
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
         .docs-layout {
             display: grid;
-            grid-template-columns: 280px 1fr; /* Fixed Sidebar + Fluid Content */
+            grid-template-columns: 280px 1fr;
+            /* Fixed Sidebar + Fluid Content */
             max-width: 1600px;
             margin: 0 auto;
             width: 100%;
@@ -24,49 +30,167 @@
             border-right: 1px solid var(--border);
             padding: 2rem 1.5rem;
             position: sticky;
-            top: 80px; /* Below header */
+            top: 80px;
+            /* Below header */
             height: calc(100vh - 80px);
             overflow-y: auto;
             background: var(--bg);
         }
-        
-        .sidebar-group { margin-bottom: 2rem; }
-        .sidebar-title { 
-            font-family: 'JetBrains Mono', monospace; 
-            font-size: 0.75rem; 
-            color: var(--muted); 
-            text-transform: uppercase; 
-            margin-bottom: 1rem; 
+
+        /* SEARCH BOX CSS */
+        .search-container {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 14px;
+            background: #000;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--fg);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+        }
+
+        .search-results {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-top: 4px;
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .search-results ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .search-results li {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .search-results li:last-child {
+            border-bottom: none;
+        }
+
+        .search-results a {
+            display: block;
+            padding: 10px 14px;
+            color: var(--fg);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+
+        .search-results a:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--primary);
+        }
+
+        .no-results {
+            padding: 10px 14px;
+            color: var(--muted);
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        /* SIDEBAR LINKS */
+        .sidebar-group {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
             letter-spacing: 0.05em;
         }
-        
-        .sidebar-link { 
-            display: block; 
-            padding: 6px 0; 
-            color: var(--fg); 
-            font-size: 0.9rem; 
-            text-decoration: none; 
+
+        .sidebar-link {
+            display: block;
+            padding: 6px 0;
+            color: var(--fg);
+            font-size: 0.9rem;
+            text-decoration: none;
             border-left: 1px solid transparent;
             padding-left: 1rem;
             margin-left: -1px;
         }
-        .sidebar-link:hover { color: var(--primary); border-left-color: var(--muted); }
-        .sidebar-link.active { 
-            color: var(--primary); 
-            font-weight: 600; 
-            border-left-color: var(--kwd); 
-            background: linear-gradient(90deg, rgba(255,255,255,0.03), transparent);
+
+        .sidebar-link:hover {
+            color: var(--primary);
+            border-left-color: var(--muted);
+        }
+
+        .sidebar-link.active {
+            color: var(--primary);
+            font-weight: 600;
+            border-left-color: var(--kwd);
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.03), transparent);
         }
 
         /* MAIN CONTENT area */
-        .doc-content { padding: 3rem 4rem; max-width: 900px; }
-        
+        .doc-content {
+            padding: 3rem 4rem;
+            max-width: 900px;
+        }
+
         /* Typography for Docs */
-        .doc-content h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .doc-content h2 { font-size: 1.5rem; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
-        .doc-content p { margin-bottom: 1.5rem; color: var(--muted); }
-        .doc-content code { background: #000; padding: 2px 6px; border: 1px solid var(--border); border-radius: 4px; font-family: 'JetBrains Mono'; font-size: 0.85rem; color: var(--str); }
-        .doc-content pre { background: #000; padding: 1.5rem; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 2rem; overflow-x: auto; }
+        .doc-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .doc-content h2 {
+            font-size: 1.5rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .doc-content p {
+            margin-bottom: 1.5rem;
+            color: var(--muted);
+        }
+
+        .doc-content code {
+            background: #000;
+            padding: 2px 6px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: 'JetBrains Mono';
+            font-size: 0.85rem;
+            color: var(--str);
+        }
+
+        .doc-content pre {
+            background: #000;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
 
         .doc-content table {
             width: 100%;
@@ -75,7 +199,8 @@
             font-size: 0.9rem;
             border: 1px solid var(--border);
             border-radius: 6px;
-            overflow: hidden; /* Keeps borders sharp */
+            overflow: hidden;
+            /* Keeps borders sharp */
             background: var(--surface);
         }
 
@@ -95,33 +220,53 @@
             padding: 14px 16px;
             border-bottom: 1px solid var(--border);
             color: var(--fg);
-            vertical-align: top; /* Aligns multiline descriptions nicely */
+            vertical-align: top;
         }
 
-        /* Highlight the 'Signature' column (usually the 2nd one) */
         .doc-content td:nth-child(2) {
             font-family: 'JetBrains Mono', monospace;
-            color: var(--fn); /* Blue-ish function color */
+            color: var(--fn);
             font-size: 0.85rem;
-            background: rgba(0,0,0,0.2); /* Slight dim for code background */
+            background: rgba(0, 0, 0, 0.2);
         }
-        
-        /* Make the 'Method' column (1st one) bold */
+
         .doc-content td:nth-child(1) strong {
             color: var(--primary);
             font-weight: 700;
         }
 
-        .doc-content tr:last-child td { border-bottom: none; }
-        .doc-content tr:hover { background: rgba(255,255,255,0.02); }
+        .doc-content tr:last-child td {
+            border-bottom: none;
+        }
+
+        .doc-content tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
 
         /* API BADGES */
-        .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; border: 1px solid var(--border); font-family: 'JetBrains Mono'; text-transform: uppercase; }
-        .badge.complexity { border-color: var(--kwd); color: var(--kwd); }
-        .badge.version { border-color: var(--fn); color: var(--fn); }
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border: 1px solid var(--border);
+            font-family: 'JetBrains Mono';
+            text-transform: uppercase;
+        }
 
+        .badge.complexity {
+            border-color: var(--kwd);
+            color: var(--kwd);
+        }
+
+        .badge.version {
+            border-color: var(--fn);
+            color: var(--fn);
+        }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -136,13 +281,20 @@
 
     <div class="docs-layout">
         <aside class="sidebar">
+
+            <div class="search-container">
+                <input type="text" id="search" class="search-input" placeholder="Search docs..." autocomplete="off">
+                <div class="search-results" id="search-results"></div>
+            </div>
+
             <div class="sidebar-group">
                 <div class="sidebar-title">Standard Library</div>
                 {% set std_section = get_section(path="std/_index.md") %}
                 {% for page in std_section.pages | sort(attribute="title") %}
-                    <a href="{{ page.permalink }}" class="sidebar-link {% if current_path and current_path == page.path %}active{% endif %}">
-                        {{ page.title }}
-                    </a>
+                <a href="{{ page.permalink }}"
+                    class="sidebar-link {% if current_path and current_path == page.path %}active{% endif %}">
+                    {{ page.title }}
+                </a>
                 {% endfor %}
             </div>
 
@@ -150,19 +302,71 @@
                 <div class="sidebar-title">Community Examples</div>
                 {% set rosetta_section = get_section(path="examples/rosetta/_index.md") %}
                 {% for page in rosetta_section.pages | sort(attribute="title") %}
-                    <a href="{{ page.permalink }}" class="sidebar-link {% if current_path and current_path == page.path %}active{% endif %}">
-                        {{ page.title }}
-                    </a>
+                <a href="{{ page.permalink }}"
+                    class="sidebar-link {% if current_path and current_path == page.path %}active{% endif %}">
+                    {{ page.title }}
+                </a>
                 {% endfor %}
             </div>
         </aside>
 
         <main class="doc-content">
             {% block content %}
-                {{ section.content | default(value=page.content) | safe }}
+            {{ section.content | default(value=page.content) | safe }}
             {% endblock content %}
         </main>
     </div>
 
+    <script src="{{ get_url(path='elasticlunr.min.js') }}"></script>
+    <script src="{{ get_url(path='search_index.en.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var searchInput = document.getElementById("search");
+            var searchResults = document.getElementById("search-results");
+
+            if (!searchInput) return;
+
+            searchInput.addEventListener("keyup", function (e) {
+                var term = e.target.value.trim();
+                if (term === "") {
+                    searchResults.style.display = "none";
+                    searchResults.innerHTML = "";
+                    return;
+                }
+
+                if (!window.searchIndex) return;
+
+                var results = window.searchIndex.search(term, {
+                    bool: "OR",
+                    expand: true
+                });
+
+                if (results.length === 0) {
+                    searchResults.style.display = "block";
+                    searchResults.innerHTML = "<div class='no-results'>No results found</div>";
+                    return;
+                }
+
+                searchResults.style.display = "block";
+                var html = "<ul>";
+                // Max 8 results to keep dropdown clean
+                for (var i = 0; i < Math.min(results.length, 8); i++) {
+                    var ref = results[i].ref;
+                    var doc = window.searchIndex.documentStore.getDoc(ref);
+                    html += `<li><a href="${doc.url}">${doc.title}</a></li>`;
+                }
+                html += "</ul>";
+                searchResults.innerHTML = html;
+            });
+
+            // Close dropdown if clicking outside
+            document.addEventListener('click', function (e) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.style.display = "none";
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
