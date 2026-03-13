@@ -53,8 +53,7 @@
         style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; padding: 2rem 0;">
         {% for sponsor in sponsors %}
         <a href="{{ sponsor.url }}" target="_blank" rel="noopener" class="sponsor-item">
-            <img src="{{ sponsor.avatarUrl }}" alt="{{ sponsor.login }}" class="avatar-grid"
-                style="width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--border);">
+            <img src="{{ sponsor.avatarUrl }}" alt="{{ sponsor.login }}" class="avatar-grid">
             <span class="sponsor-name">{{ sponsor.login }}</span>
         </a>
         {% endfor %}

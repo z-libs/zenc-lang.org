@@ -720,15 +720,14 @@ pre code .z-link {
     z-index: 10;
 }
 
-}
-
 .sponsor-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
-    transition: transform 0.3s ease;
-    text-decoration: none;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none !important;
+    width: 100px;
 }
 
 .sponsor-item:hover {
@@ -748,10 +747,16 @@ pre code .z-link {
 
 .sponsors-container {
     width: 100%;
-    min-height: 200px;
-    /* Prevent collapse if images load slowly */
+    margin-top: 4rem;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+min-height: 200px;
+/* Prevent collapse if images load slowly */
+display: flex;
+justify-content: center;
 }
 }
 
