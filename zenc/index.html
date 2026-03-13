@@ -327,8 +327,9 @@
 
                             if (sponsors && sponsors.length > 0) {
                                 list.innerHTML = sponsors.map(s => `
-                                    <a href="${s.url}" target="_blank" rel="noopener">
-                                        <img src="${s.avatarUrl}" alt="${s.login}" title="${s.login}" class="avatar-grid">
+                                    <a href="${s.url}" target="_blank" rel="noopener" class="sponsor-item">
+                                        <img src="${s.avatarUrl}" alt="${s.login}" class="avatar-grid">
+                                        <span class="sponsor-name">${s.login}</span>
                                     </a>
                                 `).join('');
                             }

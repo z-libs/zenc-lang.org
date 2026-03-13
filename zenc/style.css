@@ -720,34 +720,39 @@ pre code .z-link {
     z-index: 10;
 }
 
-.loading-sponsors,
-.no-sponsors {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
+}
+
+.sponsor-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+}
+
+.sponsor-item:hover {
+    transform: translateY(-5px);
+}
+
+.sponsor-name {
+    font-size: 0.8rem;
+    font-weight: 600;
     color: var(--muted);
-    font-style: italic;
-    opacity: 0.7;
+    transition: color 0.3s ease;
 }
 
-width: 100%;
-min-height: 200px;
-/* Prevent collapse if images load slowly */
+.sponsor-item:hover .sponsor-name {
+    color: var(--primary);
 }
 
-.sponsor-source,
-.sponsor-avatars {
+.sponsors-container {
     width: 100%;
-    max-width: 800px;
+    min-height: 200px;
+    /* Prevent collapse if images load slowly */
     display: flex;
     justify-content: center;
 }
-
-.avatar-grid {
-    max-width: 100%;
-    height: auto;
-    filter: none;
-    /* avatars should be in their intended colors */
-    transition: opacity 0.3s ease;
 }
 
 .gallery-flex a:hover .avatar-grid {
