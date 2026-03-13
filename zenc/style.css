@@ -688,27 +688,51 @@ pre code .z-link {
     font-weight: 700;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     letter-spacing: 0.1em;
     text-align: center;
 }
 
-.gallery-grid {
+.gallery-flex {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 3rem;
+    width: 100%;
 }
 
-.gallery-grid img {
+.sponsor-source {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.sponsor-badge {
+    height: 32px;
+    border-radius: 4px;
+    transition: transform 0.2s ease;
+}
+
+.sponsor-badge:hover {
+    transform: scale(1.05);
+}
+
+.sponsor-avatars {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+}
+
+.avatar-grid {
     max-width: 100%;
     height: auto;
-    filter: grayscale(1) invert(1) brightness(0.9);
-    transition: filter 0.3s ease;
+    /* Removed filters that distorted PFPs */
+    transition: opacity 0.3s ease;
 }
 
-.gallery-grid a:hover img {
-    filter: none;
+.sponsor-avatars a:hover .avatar-grid {
+    opacity: 0.9;
 }
 
 .tier-card.featured::after {
