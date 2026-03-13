@@ -317,6 +317,60 @@
             border-color: var(--fn);
             color: var(--fn);
         }
+
+        /* Footer in Docs */
+        .footer-docs {
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            padding: 4rem 4rem;
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: 4rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .footer-docs .footer-col h4 {
+            color: var(--fg);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-docs .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-docs .footer-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-docs .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: all 0.2s;
+            width: fit-content;
+        }
+
+        .footer-docs .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(4px);
+        }
+
+        @media (max-width: 768px) {
+            .footer-docs {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                padding: 4rem 2rem;
+            }
+        }
     </style>
 </head>
 
@@ -385,6 +439,40 @@
             {% endblock content %}
         </main>
     </div>
+
+    <footer class="container footer-docs">
+        <div class="footer-info">
+            <strong class="footer-logo">Zen C</strong>
+            <span>Modern systems programming with zero compromises.</span>
+            <span>&copy; 2026 z-libs Org.</span>
+        </div>
+        <div class="footer-col">
+            <h4>Product</h4>
+            <div class="footer-links">
+                <a href="https://zenc-lang.org">Home</a>
+                <a href="https://docs.zenc-lang.org">Documentation</a>
+                <a href="https://git.zenc-lang.org">Source Code</a>
+                <a href="https://opencollective.com/zenc">Sponsor Project</a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Standard Library</h4>
+            <div class="footer-links">
+                <a href="/std/vec/">Vector</a>
+                <a href="/std/map/">Map</a>
+                <a href="/std/net/">Network</a>
+                <a href="/std/fs/">File System</a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Community</h4>
+            <div class="footer-links">
+                <a href="https://github.com/Zuhaitz-dev">Maintainer</a>
+                <a href="https://git.zenc-lang.org/Zen-C/about/">About</a>
+                <a href="mailto:contact@zenc-lang.org">Contact</a>
+            </div>
+        </div>
+    </footer>
 
     <script src="{{ get_url(path='elasticlunr.min.js') }}"></script>
     <script src="{{ get_url(path='search_index.en.js') }}"></script>
