@@ -15,9 +15,11 @@ jobs:
       - name: Fetch GitHub Sponsors
         run: |
           mkdir -p docs.zenc-lang.org/data
+          # Use sponsorshipsAsMaintainer to get people who sponsor you
+          # Use || echo '{"data":{"user":{"sponsorshipsAsMaintainer":{"nodes":[]}}}}' as a fallback to prevent jq from failing if the query returns an error or empty
           curl -H "Authorization: bearer ${{ secrets.WEBSITE_REPO_TOKEN }}" \
-               -X POST -d '{"query": "query { user(login: \"Zuhaitz-dev\") { sponsors(first: 100) { edges { node { ... on User { login avatarUrl url } ... on Organization { login avatarUrl url } } } } } }"}' \
-               https://api.github.com/graphql | jq '.data.user.sponsors.edges | map(.node)' > docs.zenc-lang.org/data/sponsors.json
+               -X POST -d '{"query": "query { user(login: \"Zuhaitz-dev\") { sponsorshipsAsMaintainer(first: 100) { nodes { sponsorEntity { ... on User { login avatarUrl url } ... on Organization { login avatarUrl url } } } } } }"}' \
+               https://api.github.com/graphql | jq '.data.user.sponsorshipsAsMaintainer.nodes // [] | map(.sponsorEntity)' > docs.zenc-lang.org/data/sponsors.json
 
       - name: Build Zola Docs
         run: |
