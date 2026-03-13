@@ -695,23 +695,29 @@ pre code .z-link {
 
 .gallery-flex {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
+    /* Allow items to wrap to the next line */
     justify-content: center;
+    /* Center the items horizontally */
     align-items: center;
     gap: 1.5rem;
+    /* Space between avatars */
     padding: 1rem 0;
+    max-width: 100%;
+    /* Ensure it doesn't overflow */
 }
 
 .avatar-grid {
     width: 64px;
     height: 64px;
     border-radius: 50%;
+    /* Make them perfect circles */
     border: 2px solid var(--border);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     background: var(--surface);
     display: block;
     object-fit: cover;
+    /* Ensures the image fills the circle without distortion */
 }
 
 .avatar-grid:hover {
@@ -728,8 +734,9 @@ pre code .z-link {
     gap: 0.75rem;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none !important;
-    width: 100px;
-    flex-shrink: 0;
+    width: 80px;
+    /* Reduced width to fit more items */
+    /* Removed flex-shrink: 0 so they can resize slightly on small screens */
 }
 
 .sponsor-item:hover {
