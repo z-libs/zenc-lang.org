@@ -889,14 +889,21 @@ footer.container {
 .footer-links {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    /* Forces alignment to the left */
     gap: 0.75rem;
 }
 
 .footer-links a {
+    display: block;
+    /* Prevents inline wrapping behaviors */
     color: var(--muted);
     text-decoration: none;
     transition: all 0.2s;
     width: fit-content;
+    /* Keeps hover hitboxes tight to the text */
+    white-space: nowrap;
+    /* Prevents awkward multi-line breaks like 'Sponsor \n Project' */
 }
 
 .footer-links a:hover {
