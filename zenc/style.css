@@ -917,16 +917,21 @@ footer.container {
     position: relative;
     max-width: 900px;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 3rem 0;
 }
 
+/* Gradient fading line */
 .roadmap-line {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 50%;
     width: 2px;
-    background: var(--border);
+    background: linear-gradient(to bottom,
+            transparent 0%,
+            var(--border) 10%,
+            var(--border) 90%,
+            transparent 100%);
     transform: translateX(-50%);
 }
 
@@ -935,91 +940,131 @@ footer.container {
     width: 50%;
     padding: 0 3rem 4rem 0;
     text-align: right;
+    perspective: 1000px;
 }
 
-/* Alternate sides for roadmap items */
 .roadmap-item:nth-child(even) {
     left: 50%;
     padding: 0 0 4rem 3rem;
     text-align: left;
 }
 
+/* Polished Node Markers */
 .roadmap-marker {
     position: absolute;
     top: 0;
-    right: -7px;
-    width: 14px;
-    height: 14px;
+    right: -8px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    background: var(--bg);
-    border: 2px solid var(--muted);
+    background: var(--surface);
+    border: 3px solid #333;
     z-index: 2;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 0 0 4px var(--bg);
+    /* Creates a cutout/gap effect */
 }
 
 .roadmap-item:nth-child(even) .roadmap-marker {
-    left: -7px;
+    left: -8px;
     right: auto;
 }
 
-/* Highlight the active/current phase */
+/* Active State with Pulse Animation */
 .roadmap-item.active .roadmap-marker {
     border-color: var(--kwd);
-    /* Vibrant Orange */
-    background: var(--kwd);
-    box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+    background: var(--bg);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 20px rgba(249, 115, 22, 0.6);
+    animation: pulse-marker 2.5s infinite;
 }
 
+@keyframes pulse-marker {
+    0% {
+        box-shadow: 0 0 0 4px var(--bg), 0 0 0 0 rgba(249, 115, 22, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 4px var(--bg), 0 0 0 15px rgba(249, 115, 22, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 4px var(--bg), 0 0 0 0 rgba(249, 115, 22, 0);
+    }
+}
+
+/* Glassmorphism Cards */
 .roadmap-content {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 2rem;
-    transition: border-color 0.2s, transform 0.2s;
+    background: linear-gradient(145deg, rgba(28, 28, 27, 0.95) 0%, rgba(22, 22, 21, 0.6) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+    padding: 2.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 }
 
 .roadmap-content:hover {
-    border-color: rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7);
 }
 
 .roadmap-item.active .roadmap-content {
-    border-color: rgba(249, 115, 22, 0.3);
-    /* Subtle orange border */
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    background: linear-gradient(145deg, rgba(249, 115, 22, 0.04) 0%, rgba(22, 22, 21, 0.8) 100%);
 }
 
+/* Badge-style Phase Labels */
 .roadmap-phase {
+    display: inline-block;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--kwd);
+    font-size: 0.7rem;
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 12px;
+    border-radius: 20px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-.roadmap-item:not(.active) .roadmap-phase {
-    color: var(--muted);
+.roadmap-item.active .roadmap-phase {
+    color: var(--kwd);
+    background: rgba(249, 115, 22, 0.1);
+    border-color: rgba(249, 115, 22, 0.2);
 }
 
 .roadmap-content h3 {
-    font-size: 1.25rem;
-    color: var(--primary);
-    margin-bottom: 1rem;
+    font-size: 1.35rem;
+    color: var(--fg);
+    margin-bottom: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
+/* Refined Terminal-style List */
 .roadmap-list {
     list-style: none;
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
 }
 
 .roadmap-list li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     position: relative;
+    opacity: 0.85;
+    transition: opacity 0.2s, color 0.2s;
 }
 
-/* Custom bullet points matching text alignment */
+.roadmap-list li:hover {
+    opacity: 1;
+    color: var(--fg);
+}
+
 .roadmap-item:nth-child(odd) .roadmap-list li {
     padding-right: 1.5rem;
 }
@@ -1029,17 +1074,21 @@ footer.container {
 }
 
 .roadmap-item:nth-child(odd) .roadmap-list li::after {
-    content: "•";
+    content: "→";
     position: absolute;
     right: 0;
-    color: var(--border);
+    color: var(--primary);
+    opacity: 0.3;
+    font-family: 'JetBrains Mono', monospace;
 }
 
 .roadmap-item:nth-child(even) .roadmap-list li::before {
-    content: "•";
+    content: "→";
     position: absolute;
     left: 0;
-    color: var(--border);
+    color: var(--primary);
+    opacity: 0.3;
+    font-family: 'JetBrains Mono', monospace;
 }
 
 /* --- Mobile Responsiveness --- */
@@ -1246,8 +1295,12 @@ footer.container {
 
     .roadmap-marker,
     .roadmap-item:nth-child(even) .roadmap-marker {
-        left: -7px;
+        left: -8px;
         right: auto;
+    }
+
+    .roadmap-content {
+        padding: 1.5rem;
     }
 
     .roadmap-item:nth-child(odd) .roadmap-list li {
@@ -1260,9 +1313,11 @@ footer.container {
     }
 
     .roadmap-item:nth-child(odd) .roadmap-list li::before {
-        content: "•";
+        content: "→";
         position: absolute;
         left: 0;
-        color: var(--border);
+        color: var(--primary);
+        opacity: 0.3;
+        font-family: 'JetBrains Mono', monospace;
     }
 }
