@@ -33,17 +33,9 @@ struct Thread {
 }
 ```
 
-### `Mutex`
+## Synchronization
 
-A mutual exclusion primitive for protecting shared data.
-
-```zc
-struct Mutex {
-    // Internal sync primitives
-}
-```
-
-## Methods
+For synchronization primitives such as `Mutex`, `CondVar`, `RwLock`, `Once`, and `Semaphore`, see the [std/sync](sync.md) module.
 
 ### `Thread` Methods
 
